@@ -5,7 +5,9 @@
     <title>Login</title>
   </head>
   <body>
-    <h1>No really, please enter your username and password to log in to this completely fabricated account!</h1>
+    {{#errors}}
+    <h1>{{msg}}</h1>
+    {{/errors}}
     <form class="name" action="/" method="post">
       <input type="text" name="username" value="">
       <input type="text" name="password" value="">

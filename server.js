@@ -4,6 +4,7 @@ const mustacheExpress = require('mustache-express')
 const bodyParser = require('body-parser')
 const expressValidator = require('express-validator')
 const cookie = require('cookie')
+// const userDirectory = require('./data')
 
 app.use(express.static('public'))
 app.use(bodyParser.json())
@@ -14,6 +15,20 @@ app.engine('mst', mustacheExpress())
 app.set('views', './views')
 app.set('view engine', 'mst')
 
+app.get('/index', function(req, res) {
+  res.render('index', { username: password })
+})
+
+app.post('/', (req, res) => {
+  req.checkBody('username', 'Eh there mountie, need yer username!').notEmpty()
+  const errors = req.validationErrors()
+  if (errors) {
+    res.render('login', { errors })
+  } else {
+    res.render('welcome')
+  }
+})
+
 module.exports.register = function(req, res, next) {
   req.checkBody({
     username: {
@@ -21,28 +36,13 @@ module.exports.register = function(req, res, next) {
       errorMessage: 'Username is required'
     },
 
-    email: {
-      notEmpty: true,
-      isEmail: {
-        errorMessage: 'Invalid Email Address'
-      },
-      errorMessage: 'Email is required'
-    },
-
     password: {
       notEmpty: true,
       errorMessage: 'Password is required'
-    },
-
-    password_confirmation: {
-      notEmpty: true,
-      errorMessage: 'Password Confirmation is required'
     }
   })
 
-  req.assert('password_confirmation', 'Passwords do not match').equals(req.body.password)
-
-  req.check('username', 'This username is already taken').isUsernameAvailable()
+  // req.check('username', 'This username is already taken').isUsernameAvailable()
 
   req
     .asyncValidationErrors()

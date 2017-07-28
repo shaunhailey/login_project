@@ -12,9 +12,5 @@
       <input type="text" name="password" value="">
       <button type="submit" name="button">Login</button>
     </form>
-    {{#credentials}}
-    <h2>Welcome to your fabricated account, enjoy your nothing.</h2>
-    {{/credentials}}
-
   </body>
 </html>
