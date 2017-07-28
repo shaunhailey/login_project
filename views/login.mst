@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+  </head>
+  <body>
+    <h1>No really, please enter your username and password to log in to this completely fabricated account!</h1>
+    <form class="name" action="/" method="post">
+      <input type="text" name="username" value="">
+      <input type="text" name="password" value="">
+      <button type="submit" name="button"></button>
+    </form>
+
+
+
+  </body>
+</html>
