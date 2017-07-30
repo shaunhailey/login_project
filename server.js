@@ -22,11 +22,11 @@ app.get('/', function(req, res) {
 app.post('/', (req, res) => {
   req.checkBody('username', 'Eh there mountie, need yer username!').notEmpty()
   const errors = req.validationErrors()
-  const username = req.checkBody('username')
+  const username = req.body.username
   if (errors) {
     res.render('login', { errors })
   } else {
-    res.render('welcome')
+    res.render('welcome', req.body)
   }
 })
 
