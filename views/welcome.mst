@@ -2,10 +2,12 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="styles.css">
     <title>welcome</title>
   </head>
   <body>
     <h1>Welcome to the Nothing, {{username}}</h1>
+    <iframe src="https://giphy.com/embed/nYogYgSmIJaIo" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/nYogYgSmIJaIo">via GIPHY</a></p>">
 
   </body>
 </html>

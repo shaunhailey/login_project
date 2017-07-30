@@ -3,8 +3,12 @@
   <head>
     <meta charset="utf-8">
     <title>Login</title>
+<link rel="stylesheet" href="styles.css">      
+    </style>
   </head>
   <body>
+    <h1>Unreal Login Page</h1>
+    <p>Enter your information to login to this completely fabricated account!</p>
     {{#errors}}
     <h1>{{msg}}</h1>
     {{/errors}}
