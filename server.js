@@ -15,13 +15,14 @@ app.engine('mst', mustacheExpress())
 app.set('views', './views')
 app.set('view engine', 'mst')
 
-app.get('/index', function(req, res) {
-  res.render('index', { username: password })
+app.get('/', function(req, res) {
+  res.render('login')
 })
 
 app.post('/', (req, res) => {
   req.checkBody('username', 'Eh there mountie, need yer username!').notEmpty()
   const errors = req.validationErrors()
+  const username = req.checkBody('username')
   if (errors) {
     res.render('login', { errors })
   } else {
@@ -29,35 +30,35 @@ app.post('/', (req, res) => {
   }
 })
 
-module.exports.register = function(req, res, next) {
-  req.checkBody({
-    username: {
-      notEmpty: true,
-      errorMessage: 'Username is required'
-    },
-
-    password: {
-      notEmpty: true,
-      errorMessage: 'Password is required'
-    }
-  })
-
-  // req.check('username', 'This username is already taken').isUsernameAvailable()
-
-  req
-    .asyncValidationErrors()
-    .then(function() {
-      next()
-    })
-    .catch(function(errors) {
-      if (errors) {
-        return res.json({
-          success: false,
-          errors: errors
-        })
-      }
-    })
-}
+// module.exports.register = function(req, res, next) {
+//   req.checkBody({
+//     username: {
+//       notEmpty: true,
+//       errorMessage: 'Username is required'
+//     },
+//
+//     password: {
+//       notEmpty: true,
+//       errorMessage: 'Password is required'
+//     }
+//   })
+//
+//   // req.check('username', 'This username is already taken').isUsernameAvailable()
+//
+//   req
+//     .asyncValidationErrors()
+//     .then(function() {
+//       next()
+//     })
+//     .catch(function(errors) {
+//       if (errors) {
+//         return res.json({
+//           success: false,
+//           errors: errors
+//         })
+//       }
+//     })
+// }
 
 app.listen(3000, () => {
   console.log('Magic is happening on port 3000')
