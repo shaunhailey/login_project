@@ -3,9 +3,11 @@ const app = express()
 const mustacheExpress = require('mustache-express')
 const bodyParser = require('body-parser')
 const expressValidator = require('express-validator')
-const cookie = require('cookie')
-// const userDirectory = require('./data')
+const session = require('express-session')
+const cookieParser = require('cookie-parser')
+const data = require('./data.js/data.js')
 
+app.use(cookieParser())
 app.use(express.static('public'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -23,42 +25,34 @@ app.post('/', (req, res) => {
   req.checkBody('username', 'Eh there mountie, need yer username!').notEmpty()
   const errors = req.validationErrors()
   const username = req.body.username
+  const password = req.body.password
   if (errors) {
     res.render('login', { errors })
-  } else {
+  } else if ((username, password)) {
+    'username' === userData.username
+    'password' === userData.password
     res.render('welcome', req.body)
+  } else {
+    res.render('index', req.body)
   }
 })
 
-// module.exports.register = function(req, res, next) {
-//   req.checkBody({
-//     username: {
-//       notEmpty: true,
-//       errorMessage: 'Username is required'
-//     },
+// //cookie stuff stolen from somewhere
+// app.get('/', function(req, res){
+//   var html = '<form action="/" method="post">' +
+//              'Your name: <input type="text" name="userName"><br>' +
+//              '<button type="submit">Submit</button>' +
+//              '</form>';
+//   if (req.session.userName) {
+//     html += '<br>Your username from your session is: ' + req.session.userName;
+//   }
+//   res.send(html);
+// });
 //
-//     password: {
-//       notEmpty: true,
-//       errorMessage: 'Password is required'
-//     }
-//   })
-//
-//   // req.check('username', 'This username is already taken').isUsernameAvailable()
-//
-//   req
-//     .asyncValidationErrors()
-//     .then(function() {
-//       next()
-//     })
-//     .catch(function(errors) {
-//       if (errors) {
-//         return res.json({
-//           success: false,
-//           errors: errors
-//         })
-//       }
-//     })
-// }
+// app.post('/', function(req, res){
+//   req.session.userName = req.body.userName;
+//   res.redirect('/');
+// });
 
 app.listen(3000, () => {
   console.log('Magic is happening on port 3000')
